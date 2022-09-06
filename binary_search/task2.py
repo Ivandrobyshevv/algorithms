@@ -1,19 +1,27 @@
-from math import log2, ceil
-num = int(input())
-numbers = [i for i in range(1, num+1)]
-start = 0
-end = len(numbers) - 1
-count = 0 
-while start <= end:
-    mid = (start + end) // 2
-    if num > numbers[mid]:
-        count += 1
-        start = mid + 1      
-    else:
-        count += 1
-        end = mid - 1
-print(count)
+def left_binary_search(key, numbers):
+    
+    left = -1
+    rigth = len(numbers) - 1
+    while left + 1 < rigth:
+        mid = left + (rigth - left) // 2
+        if numbers[mid] < key:
+            left = mid
+        else:
+            rigth = mid
+    if numbers[rigth] == key:
+        return rigth + 1
+    else: return 0
 
 
-print(ceil(log2(num)))
-print(ceil(log2(int(input()))))
+
+
+
+def main():
+    numbers = list(map(int, input("Введити N упорядоченных по неубыванию целых чисел: ").split()))
+    keys = list(map(int, input("Введите M целых неотрицательных чисел (ключей для поиска): ").split()))
+    for key in keys:
+        print(left_binary_search(key, numbers))
+
+
+if __name__ == '__main__':
+    main()
